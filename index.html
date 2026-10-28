@@ -696,7 +696,7 @@ async function choose(i){
 function backToPick(){
  ++loadSerial;artReady=false;pendingStart=false;
  running=false;clearInterval(timer);
- $("game").hidden=true;$("pick").hidden=false;$("lineFab").hidden=false;$("over").style.display="none";
+ $("game").hidden=true;$("pick").hidden=false;$("lineFab").hidden=false;clearTimeout(showResult.ov);$("over").style.display="none";
  window.scrollTo(0,0);
  if(window.fxAfterBack) fxAfterBack();
 }
@@ -807,7 +807,7 @@ function end(win){
 function start(){
  if(!artReady)return;
  audioOn();
- $("over").style.display="none";$("how").classList.add("hide");$("again2").classList.remove("show");
+ clearTimeout(showResult.ov);$("over").style.display="none";$("how").classList.add("hide");$("again2").classList.remove("show");
  document.querySelectorAll(".ring,.x").forEach(e=>e.remove());$("list").textContent="";
  $("v2").classList.remove("show");
  running=true;left=SECS;clicks=MAXCLICK;found=new Set();clickLog=[];tapLog=[];matchOf=new Map();update();
@@ -996,7 +996,7 @@ const EXH={name:"「清晨初醒」四人創作聯展",dates:"2026.10.12 – 11.
   hours:["週一至五　10:30 – 19:30","週六　11:00 – 19:00　週日公休"],addr:"406 臺中市北屯區松和里松竹路二段 349 號",
   tel:"0422474215",web:"https://sfg218.com/news2_info.php?no=98"};
 const MAP_URL="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("松風閣畫廊 松竹旗艦店 臺中市北屯區松竹路二段349號");
-const COUPON_URL="https://lin.ee/UpjDF8f";   // 松風閣畫廊（正式）LINE 優惠券「小相框兌換」（10/27 19:14 番薯重建的新券，附券圖）；空字串時按鈕只會跳預覽提示
+const COUPON_URL="https://lin.ee/STkCtfk";   // 松風閣畫廊（正式）LINE 優惠券「小相框兌換」（10/27 19:14 番薯重建的新券，附券圖）；空字串時按鈕只會跳預覽提示
 const cn=n=>{const d="零一二三四五六七八九";return n<10?d[n]:n===10?"十":n<20?"十"+d[n-10]:n<100?d[Math.floor(n/10)]+"十"+(n%10?d[n%10]:""):String(n)};
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function nowTaipei(){
@@ -1068,7 +1068,7 @@ function showResult(win,r,opts){opts=opts||{};
   bind("otherBtn",backToPick);
   bind("ansBtn",()=>{ov.style.display="none";showAnswers();$("p2").scrollIntoView({block:"center",behavior:"smooth"})});
   document.getElementById("pvbar").style.display="none";
-  setTimeout(()=>{
+  clearTimeout(showResult.ov);showResult.ov=setTimeout(()=>{   // 存起來，重玩／返回時要能取消，免得舊結果畫面 0.5 秒後蓋住新的一局
     ov.style.display="flex";try{ov.focus({preventScroll:true})}catch(e){}
     if(win){
      if(opts.review){Snd.play("toggle")}else{
