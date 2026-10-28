@@ -802,7 +802,6 @@ function end(win){
  const why=left<=0?"時間到了":MAXCLICK+" 下都用完了";
  tip(win?"全部找到了！":why,win?"good":"bad",true);
  showResult(win,{used:SECS-left,left:left,found:found.size,why:why});
- $("again2").classList.add("show");
 }
 function start(){
  if(!artReady)return;
@@ -1069,6 +1068,7 @@ function showResult(win,r,opts){opts=opts||{};
   bind("ansBtn",()=>{ov.style.display="none";showAnswers();$("p2").scrollIntoView({block:"center",behavior:"smooth"})});
   document.getElementById("pvbar").style.display="none";
   clearTimeout(showResult.ov);showResult.ov=setTimeout(()=>{   // 存起來，重玩／返回時要能取消，免得舊結果畫面 0.5 秒後蓋住新的一局
+    if(!(typeof opts!=="undefined"&&opts&&opts.review))$("again2").classList.add("show");   // 「再玩一次」跟結果畫面同一刻出現，不要早半秒閃一下（番薯 10/28）；重看證明不是剛打完一局，不顯示
     ov.style.display="flex";try{ov.focus({preventScroll:true})}catch(e){}
     if(win){
      if(opts.review){Snd.play("toggle")}else{
