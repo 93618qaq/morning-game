@@ -265,6 +265,10 @@ header.hero::after{content:"";position:absolute;left:50%;bottom:-124px;width:520
 @media (prefers-reduced-motion:reduce){#over *,#over::before{animation:none!important;transition:none!important}
   #over h2 .ch,#over .subt,#over .msg,#over .cert,#over .tip2,#over .coupon,#over .cpnote,#over .acts,#over .exh{opacity:1!important;transform:none!important;filter:none!important}
   #over .cert .seal2{opacity:.95!important;transform:rotate(-8deg)!important}#over .sun{opacity:.8!important;transform:none!important}#over .cert::after{display:none}}
+/* 保險：手機瀏覽器的動畫沒播出來（內容卡在透明、畫面空白）時，由程式加上 .noanim，直接顯示全部內容 */
+#over.noanim *,#over.noanim::before{animation:none!important;transition:none!important}
+#over.noanim h2 .ch,#over.noanim .subt,#over.noanim .msg,#over.noanim .cert,#over.noanim .tip2,#over.noanim .coupon,#over.noanim .cpnote,#over.noanim .acts,#over.noanim .exh{opacity:1!important;transform:none!important;filter:none!important}
+#over.noanim .cert .seal2{opacity:.95!important;transform:rotate(-8deg)!important}#over.noanim .sun{opacity:.8!important;transform:none!important}#over.noanim .cert::after{display:none}
 .spark{position:fixed;z-index:120;pointer-events:none;color:#fff;text-shadow:0 0 8px rgba(255,214,170,.95),0 0 16px rgba(255,190,150,.7);font-size:16px;line-height:1;left:0;top:0}
 /* 右上角音效開關 */
 .snd{position:fixed;top:12px;right:12px;z-index:90;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#5a3a34;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 2px 10px rgba(90,50,44,.18)}
@@ -1024,6 +1028,9 @@ function showResult(win,r,opts){opts=opts||{};
   }
   ov.innerHTML='<button class="ovback" id="ovBack" type="button">‹ 返回選畫</button>'+html;ov.className=win?"win":"lose";ov.scrollTop=0;
   const bind=(id,fn)=>{const e=document.getElementById(id);if(e)e.addEventListener("click",fn)};
+  // 保險：入場動畫全部播完（約 3.4 秒，含 0.5 秒延遲開場）後，一律改成靜態顯示（不再有持續閃動的光）。
+  // 有些手機（內建瀏覽器）的動畫會沒播出來、或畫面層沒畫出來，客人只看到空白；靜態顯示不靠動畫，一定看得到。
+  clearTimeout(showResult.wd);showResult.wd=setTimeout(()=>{if(getComputedStyle(ov).display!=="none")ov.classList.add("noanim")},3900);
   bind("cpn",()=>{
     if(!COUPON_URL){ toast("（預覽）正式版這裡會在新視窗開 LINE 優惠券"); return }
     let w=null; try{ w=window.open(COUPON_URL,"_blank") }catch(e){}   // 不加 noopener：加了一律回 null，就分不出「被平台擋掉」
