@@ -379,6 +379,7 @@ body{overflow-x:clip}   /* 柔霧色、鋪滿寬度的入口都比內容欄寬�
 .fx-notice b{font:500 16px/1 var(--display)}
 .fx-run .fx-notice{opacity:1}.fx-skip .fx-notice{transition:none}
 .fx-notice strong{display:block;font:500 20px/1.3 var(--display);letter-spacing:.2em;margin:0 0 4px}
+.fx-notice .fx-closed{display:block;margin-top:9px;padding-top:9px;border-top:1px dashed rgba(255,255,255,.7);font:500 14px/1.6 var(--serif);letter-spacing:.1em}   /* 休息日公告：番薯 10/30 12:24 指定放首頁公告框；日期照 10/28 日誌，未與店裡核對 */
 .fx-stores{margin:12px auto 0;max-width:min(88%,360px);padding:12px 16px 13px;border:1px solid rgba(255,255,255,.7);border-radius:14px;background:rgba(255,255,255,.1);color:#fff;text-align:left;text-shadow:0 1px 10px rgba(110,60,55,.45);opacity:0;transition:opacity .8s ease 2.2s}
 .fx-stores h3{margin:0 0 6px;text-align:center;font:500 11px/1 var(--sans);letter-spacing:.4em;opacity:.9}
 .fx-stores ul{list-style:none;margin:0;padding:0}
@@ -396,6 +397,7 @@ body{overflow-x:clip}   /* 柔霧色、鋪滿寬度的入口都比內容欄寬�
 .fx-cue i{display:block;font-style:normal;font-size:18px;animation:fxBob 1.8s ease-in-out infinite}
 @keyframes fxBob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 .fx-cue:active{transform:scale(.94)}
+.fx-cue.fx-cue-top{margin-top:14px;font:500 15px/1.6 var(--serif);letter-spacing:.14em}   /* 首頁第一屏的滑動提示：番薯 10/30 12:31 指定（公告加長後，下方「往下選一幅畫」鈕要滑一屏多才看得到） */
 /* 慢飄光點：入口背景裡柔柔往上飄的小光（只用位移與透明度；--rise 由程式依入口高度設定） */
 .fx-ent>.fx-motes{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity 3s ease 1.6s}
 .fx-run .fx-motes{opacity:1}
@@ -503,7 +505,8 @@ svg text{font-weight:800!important}   /* 右下角 LINE 圖示裡的 LINE 字樣
     <h1 class="fx-title" aria-label="清晨初醒，"><span class="fx-ch" style="--i:0" aria-hidden="true">清</span><span class="fx-ch" style="--i:1" aria-hidden="true">晨</span><span class="fx-ch" style="--i:2" aria-hidden="true">初</span><span class="fx-ch" style="--i:3" aria-hidden="true">醒</span><span class="fx-ch fx-cm" style="--i:4" aria-hidden="true">，</span></h1>
     <div class="fx-eb">大 家 來 找 碴</div>
     <p class="fx-sub">兩幅畫之間，藏著 <b>11</b> 處不同<br>限時 <b>111</b> 秒，全部找出來</p>
-    <p class="fx-notice" id="fxNotice"><em>公　告</em><strong>來店現場挑戰</strong>正式版現場挑戰，通關享買畫及裱框 <b>11%</b> 折扣</p>
+    <button class="fx-cue fx-cue-top" id="fxCueTop" type="button">遊戲在下方，請往下滑選一幅畫<i>⌄</i></button>
+    <p class="fx-notice" id="fxNotice"><em>公　告</em><strong>來店現場挑戰</strong>正式版現場挑戰，通關享買畫及裱框 <b>11%</b> 折扣<span class="fx-closed">11/1（日）、11/8（日）松竹門市公休</span></p>
     <div class="fx-stores" id="fxStores"><h3>門　市　資　訊</h3><ul><li><div class="sn">松竹門市<i>展覽中</i></div><a class="st" href="tel:0422474215">04-22474215</a><a class="sa" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%BE%E9%A2%A8%E9%96%A3%E7%95%AB%E5%BB%8A%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%9D%BE%E7%AB%B9%E8%B7%AF%E4%BA%8C%E6%AE%B5349%E8%99%9F" target="_blank" rel="noopener noreferrer">台中市北屯區松竹路二段349號</a></li><li><div class="sn">太平門市</div><a class="st" href="tel:0423921101">04-23921101</a><a class="sa" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%BE%E9%A2%A8%E9%96%A3%E7%95%AB%E5%BB%8A%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%A4%AA%E5%B9%B3%E5%8D%80%E5%A4%A7%E8%88%88%E8%B7%AF218%E8%99%9F" target="_blank" rel="noopener noreferrer">台中市太平區大興路218號</a></li><li><div class="sn">大山藝術（潭子）</div><a class="st" href="tel:0425354805">04-25354805</a><a class="sa" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%BE%E9%A2%A8%E9%96%A3%E7%95%AB%E5%BB%8A%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E6%BD%AD%E5%AD%90%E5%8D%80%E4%B8%AD%E5%B1%B1%E8%B7%AF%E4%B8%80%E6%AE%B5368%E8%99%9F" target="_blank" rel="noopener noreferrer">台中市潭子區中山路一段368號</a></li><li><div class="sn">鹿港門市</div><a class="st" href="tel:047783277">04-7783277</a><a class="sa" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%BE%E9%A2%A8%E9%96%A3%E7%95%AB%E5%BB%8A%20%E5%BD%B0%E5%8C%96%E7%B8%A3%E9%B9%BF%E6%B8%AF%E9%8E%AE%E9%B9%BF%E6%9D%B1%E8%B7%AF%E4%BA%8C%E6%AE%B5527%E5%B7%B783%E8%99%9F" target="_blank" rel="noopener noreferrer">彰化縣鹿港鎮鹿東路二段527巷83號</a></li></ul><p class="sx">「清晨初醒」展覽僅在松竹門市展出<br><span style="white-space:nowrap">2026.10.12 – 11.21</span></p></div>
     <button class="fx-cue" id="fxCue" type="button">往下選一幅畫<i>⌄</i></button>
   </header>
@@ -1116,7 +1119,7 @@ window.__fx={pickEntrance:fxPickEntrance,data:FX_DATA};
     if(window.ResizeObserver) new ResizeObserver(setRise).observe(root); else addEventListener("resize",setRise);
     if(window.IntersectionObserver) new IntersectionObserver(es=>mo.classList.toggle("fx-off",!es[0].isIntersecting)).observe(root);   // 看不到入口時暫停，省電
   }
-  document.getElementById("fxCue").addEventListener("click",()=>document.getElementById("fxHead").scrollIntoView({behavior:REDUCE?"auto":"smooth",block:"start"}));
+  ["fxCue","fxCueTop"].forEach(id=>document.getElementById(id).addEventListener("click",()=>document.getElementById("fxHead").scrollIntoView({behavior:REDUCE?"auto":"smooth",block:"start"})));
 })();
 const fxZonesEl=document.getElementById("fxZones"),fxFans=[];let fxOpen=null;
 FX_ZONES.forEach(z=>{
